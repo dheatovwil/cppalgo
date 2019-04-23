@@ -41,13 +41,14 @@ int main() {
     // memo[0] always hold the first power of matrix, manual assignment for optimization
 
     m_copy(memo[0], base);
-
+    // compute up to 2^hi using memoization
     for (unsigned i=1; i <= hi; ++i)
         matrix_multi(memo[i-1],memo[i-1],memo[i]);
 
     ull matrix[4];
     m_copy(matrix, memo[lo]);
     for (unsigned i=lo+1u; i<= hi;i++)
+        // multiply with if bit is 1
         if ((n >> i) & 1u) {
             ull temp[4];
             matrix_multi(matrix, memo[i], temp);
